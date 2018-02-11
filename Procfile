@@ -1,1 +1,1 @@
-worker: node dexbox.js
+worker: node dexbot.js
