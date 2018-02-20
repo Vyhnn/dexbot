@@ -3,10 +3,12 @@ const oakdexPokedex = require('oakdex-pokedex');
 
 exports.run = (client, message, args) => {
 
-  let poke = args[0].charAt(0).toUpperCase() + args[0].slice(1)
+  let poke = args.join(" ").charAt(0).toUpperCase() + args.join(" ").slice(1);
+  console.log(poke);
 
   oakdexPokedex.findPokemon(poke, function(p) {
 
+console.log(p);
     //get 3 digits dex no.
     let id = p.national_id;
     let id_length = id.toString().length;
@@ -126,11 +128,13 @@ exports.run = (client, message, args) => {
                   + "**Sp. Defence:** " + p.base_stats.sp_def + "\n"
                   + "**Speed:** " + p.base_stats.speed + "\n";
 
+    //get setURL
+    let url = `https://bulbapedia.bulbagarden.net/wiki/${p.names.en.replace(" ", "_")}_(Pok%C3%A9mon)`
 
     //build embeded message
     const embed = new Discord.RichEmbed()
       .setTitle(`#${id} ${p.names.en}`)
-      .setURL(`https://bulbapedia.bulbagarden.net/wiki/${p.names.en}_(Pok%C3%A9mon)`)
+      .setURL(url)
       .setThumbnail(`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${id}.png`)
       .setDescription(entry)
       .setColor(color)
