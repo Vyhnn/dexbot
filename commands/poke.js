@@ -3,12 +3,17 @@ const oakdexPokedex = require('oakdex-pokedex');
 
 exports.run = (client, message, args) => {
 
-  let poke = args.join(" ").charAt(0).toUpperCase() + args.join(" ").slice(1);
+  let poke = "";
+  args.forEach(function(arg) {
+    poke += arg.charAt(0).toUpperCase() + arg.slice(1) + " ";
+  });
+
+  poke = poke.slice(0,-1);
   console.log(poke);
 
   oakdexPokedex.findPokemon(poke, function(p) {
 
-console.log(p);
+    console.log(p);
     //get 3 digits dex no.
     let id = p.national_id;
     let id_length = id.toString().length;
